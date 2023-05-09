@@ -4,18 +4,7 @@
     <title>Намуунболорт Хайртай</title>
 </head>
     <style>
-    @mixin flex-center() {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-$col-bg: #ffc568;
-$col-lttr: #763c8c;
-$col-line: #ffffff;
-$to-mobile: 520px;
-
-*,
+    *,
 *:before,
 *:after {
   box-sizing: border-box;
@@ -26,13 +15,16 @@ $to-mobile: 520px;
 html,
 body {
   min-height: 100vh;
-  @include flex-center();
-
-  background-color: $col-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc568;
   font-size: 62.5%;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  @media screen and (max-width: $to-mobile) {
+}
+@media screen and (max-width: 520px) {
+  html,
+body {
     /* don't know how to set default units to rem in mojs :(( */
   }
 }
@@ -55,29 +47,28 @@ body {
 
 .line {
   fill: none;
-  stroke: $col-line;
+  stroke: #ffffff;
   stroke-width: 8;
   stroke-linecap: round;
   stroke-miterlimit: 10;
 }
 
 .lttr {
-  fill: $col-lttr;
+  fill: #763c8c;
 }
 
 .sound {
   position: fixed;
-  color: $col-lttr;
+  color: #763c8c;
   font-size: 1.6rem;
   bottom: 1rem;
   right: 1rem;
   text-decoration: underline;
   cursor: default;
-  &--off {
-    text-decoration: line-through;
-  }
 }
-
+.sound--off {
+  text-decoration: line-through;
+}
     </style>
 <body>
     <div class="container">
