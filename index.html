@@ -4,7 +4,7 @@
     <title>Намуунболорт Хайртай</title>
 </head>
 <style>
-    @import url("https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap");
+    @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
     body, html {
         height: 100vh;
         width: 100vw;
@@ -16,7 +16,7 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        font-family: "Spartan", sans-serif;
+        font-family: 'Caveat', cursive;
         color: #2d2d2d;
     }
 
@@ -35,6 +35,7 @@
         width: -moz-max-content;
         width: max-content;
         display: flex;
+        font-family: 'Caveat', cursive;
         flex-direction: column;
     }
     .heading > div {
@@ -46,11 +47,12 @@
         width: max-content;
         white-space: nowrap;
         margin: 0;
+        font-family: 'Caveat', cursive;
         line-height: 117%;
     }
 
     .green {
-        color: #32c267;
+        color: #fd2727;
     }
 
     div.heading > div {
@@ -93,6 +95,58 @@
             transform: translateY(0);
         }
     }
+
+
+
+
+    .slide-up-1 {
+        -webkit-animation: slide-up-1 3s cubic-bezier(0.65, 0, 0.35, 1) both;
+        animation: slide-up-1 3s cubic-bezier(0.65, 0, 0.35, 1) both;
+    }
+
+    @-webkit-keyframes slide-up-1 {
+        0% {
+            transform: translateY(100px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slide-up-1 {
+        0% {
+            transform: translateY(100px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+
+
+    .slide-up-2 {
+        -webkit-animation: slide-up-2 6s cubic-bezier(0.65, 0, 0.35, 1) both;
+        animation: slide-up-2 6s cubic-bezier(0.65, 0, 0.35, 1) both;
+    }
+
+    @-webkit-keyframes slide-up-2 {
+        0% {
+            transform: translateY(100px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slide-up-2 {
+        0% {
+            transform: translateY(100px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
     *,
     *:before,
     *:after {
@@ -106,9 +160,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #ffc568;
+        background-color: #f67280;
         font-size: 62.5%;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     @media screen and (max-width: 520px) {
         html,
@@ -154,17 +207,47 @@
     .none {
         display: none;
     }
+    #love {
+        transform: scale(1);
+        transition: ease-in 2s;
+        backdrop-filter: blur(15px);
+    }
+    #love.an {
+        transform: scale(10);
+        transition: ease-in 2s;
+    }
 </style>
 <body>
-<div class="heading">
+<audio id="ms" loop autoplay>
+    <source src="C:\Users\Administrator\Downloads\nb.mp3">
+</audio>
+
+<div class="heading text" style="display: none">
     <div>
-        <p class="slide-up"><span class="green">Hello there</span>,</p>
+        <p class="slide-up"><span style="color: rgba(255,255,255,0.78)">Хайртаа</span>,</p>
     </div>
     <div>
-        <p class="slide-up">this is just</p>
+        <p class="slide-up-1">Хайрдаа хэлчих ээ</p>
     </div>
     <div>
-        <p class="slide-up">a test.</p>
+        <p class="slide-up-2">Ккк :)</p>
+    </div>
+</div>
+<div class="heading text-1" style="display: none">
+    <div>
+        <p class="slide-up">Чамдаа</p>
+    </div>
+    <div>
+        <p class="slide-up-1"><span style="color: rgba(255,255,255,0.78)">---> Хайртай <---</span></p>
+    </div>
+    <div>
+        <p class="slide-up-2">Жүү. Үнсий</p>
+    </div>
+</div>
+<img style="display: none" id="love" src="./ht.webp" alt="LOVE SHVV!!!">
+<div class="heading text-3" style="display: none">
+    <div>
+        <p class="slide-up-1"><span style="color: #ffffff">Намуунболорт</span></p>
     </div>
 </div>
 <div class="container">
@@ -184,23 +267,38 @@
     </svg>
     <div class="mo-container"> </div>
 </div>
-<audio class="blup" style="display: none">
-    <source src="https://www.freesound.org/data/previews/265/265115_4373976-lq.mp3" type="audio/ogg">
-</audio >
-<audio class="blop" style="display: none">
-    <source src="https://www.freesound.org/data/previews/265/265115_4373976-lq.mp3" type="audio/ogg">
-</audio>
 <div class="sound">sound</div>
 <script src="//cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <script>
     (function () {
+        $('.container')
+            .fadeIn(3000)
+            .delay(3000)
+            .fadeOut(2000);
         setTimeout(() => {
-            $('.container').fadeOut()
-        }, 4000)
+            $('.text')
+                .fadeIn()
+                .delay(3000)
+                .delay(3000)
+                .fadeOut(2000);
+        }, 5000)
         setTimeout(() => {
-            $('.heading').fadeIn()
-        }, 4000)
+            $('.text-1')
+                .fadeIn()
+                .delay(3000)
+                .delay(3000)
+                .fadeOut(2000);
+        }, 15000)
+        setTimeout(() => {
+            $('#love')
+                .fadeIn()
+                .delay(3000)
+        }, 25000)
+        setTimeout(() => {
+            $('#love').addClass('an');
+            $('.text-3').fadeIn().delay(3000)
+        }, 30000)
     })();
     const qs = document.querySelector.bind(document);
     const easingHeart = mojs.easing.path('M0,100C2.9,86.7,33.6-7.3,46-7.3s15.2,22.7,26,22.7S89,0,100,0');
