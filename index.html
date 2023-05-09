@@ -218,9 +218,6 @@
     }
 </style>
 <body>
-<audio id="ms" autoplay>
-    <source src="nb.mp3">
-</audio>
 
 <div class="heading text" style="display: none">
     <div>
@@ -280,6 +277,16 @@
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <script>
     (function () {
+        const source = "nb.mp3";
+        const audio = document.createElement("audio");
+        //
+        audio.autoplay = true;
+        //
+        audio.load()
+        audio.addEventListener("load", function() {
+            audio.play();
+        }, true);
+        audio.src = source;
         $('.container')
             .fadeIn(3000)
             .delay(3000)
