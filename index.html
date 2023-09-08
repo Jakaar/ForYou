@@ -1,680 +1,568 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="mn">
 <head>
-    <title>Намуунболорт Хайртай</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Хайрт минь</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
+
+		@-webkit-keyframes throb{
+			0%{
+				-webkit-transform: scale(1);
+			}
+			5%{
+				-webkit-transform: scale(1.5);
+			}
+			10%{
+				-webkit-transform: scale(1);
+			}
+			20%{
+				-webkit-transform: scale(1.4);
+			}
+			30%{
+				-webkit-transform: scale(.9);
+			}
+			40%{
+				-webkit-transform: scale(1.3);
+			}
+			50%{
+				-webkit-transform: scale(.8);
+			}
+			60%{
+				-webkit-transform: scale(1.2);
+			}
+			70%{
+				-webkit-transform: scale(.7);
+			}
+			80%{
+				-webkit-transform: scale(1.1);
+			}
+			90%{
+				-webkit-transform: scale(.6);
+			}
+			100%{
+				-webkit-transform: scale(0);
+			}
+		}
+
+		html {
+			display: table;
+			width: 100%;
+			height: 100vmin;
+			table-layout: fixed;
+		}
+
+		body {
+			display: table-cell;
+			vertical-align: middle;
+			font-family: 'Shadows Into Light';
+			color: #111;
+		}
+
+		.wrapper {
+			width: 45vmin;
+			height: 45vmin;
+			position: relative;
+			margin: 2.5vmin auto;
+		}
+
+		div.throb {
+			-webkit-animation: throb 5s ease-out;
+			animation: throb 5s infinite;
+			animation-delay: 0.8s;
+
+		}
+		input[type="checkbox"] {
+			display: none;
+		}
+
+		input[type="checkbox"] + label {
+			width: 15vmin;
+			height: 15vmin;
+			line-height: 15vmin;
+			display: inline-block;
+			position: absolute;
+			font-size: 15vmin;
+			text-align: center;
+			transition: all 1s ease;
+		}
+
+		label {
+			text-shadow: 3vmin 3vmin 10vmin rgba(0,0,0,0.5);
+		}
+		label:hover {
+			color: #c32a2a;
+			cursor: pointer;
+		}
+
+		#ck1 + label,
+		#ck2 + label {
+			border-radius: 50%;
+			top: 0;
+		}
+
+		#ck1:checked + label,
+		#ck2:checked + label,
+		#ck3:checked + label {
+			background: #c32a2a;
+			font-size: 0;
+			transition: all 1s ease;
+		}
+
+		#ck1 + label {
+			left: 0;
+		}
+
+		#ck2 + label {
+			right: 10vmin;
+		}
+
+		#ck1:checked + label,
+		#ck2:checked + label {
+			width: 27vmin; height: 27vmin;
+			border-radius: 50%;
+			line-height: 27vmin;
+		}
+
+		#ck2:checked + label {
+			right: 0;
+		}
+
+		#ck3 + label {
+			bottom: 5vmin; left: 50%;
+			margin: 0 -9vmin;
+		}
+
+		#ck3:checked + label {
+			width: 24.75vmin;
+			height: 24.75vmin;
+			bottom: 8.65vmin;
+			left: 19.1vmin;
+			transform: rotate(45deg);
+			line-height: 4.83vmin;
+		}
+
+		span {
+			display: inline-block;
+			text-align: left;
+			position: absolute;
+			bottom: 0vmin; left: 0vmin;
+			margin-bottom: -3vmin;
+			font-size: 3vmin;
+			color: #999;
+		}
+	.content {
+		.section-1 {
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			align-items: center;
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 100;
+		}
+		.section-2 {
+			display: none;
+		}
+		.section-3 {
+			position: fixed;
+			z-index: 1000;
+		}
+		.blured {
+			transition: 5s ease-in-out;
+			filter: blur(10px);
+		}
+	}
+	.black {
+		transition: 5s ease-in-out;
+		background-color: black;
+	}
+	.scale-up {
+		transition: 5s ease-in-out;
+		scale: 1000;
+	}
+	</style>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
-    body, html {
-        height: 100vh;
-        width: 100vw;
-    }
-
-    body {
-        background: white;
-        background-size: cover;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        font-family: 'Caveat', cursive;
-        color: #2d2d2d;
-    }
-
-    ::-moz-selection {
-        background: rgba(170, 170, 170, 0.3);
-    }
-
-    ::selection {
-        background: rgba(170, 170, 170, 0.3);
-    }
-
-    .heading {
-        margin: 80px 0 0 80px;
-        font-size: 64px;
-        width: -webkit-max-content;
-        width: -moz-max-content;
-        width: max-content;
-        display: flex;
-        font-family: 'Caveat', cursive;
-        flex-direction: column;
-    }
-    .heading > div {
-        overflow: hidden;
-    }
-    .heading > div > p {
-        width: -webkit-max-content;
-        width: -moz-max-content;
-        width: max-content;
-        white-space: nowrap;
-        margin: 0;
-        font-family: 'Caveat', cursive;
-        line-height: 117%;
-    }
-
-    .green {
-        color: #fd2727;
-    }
-
-    div.heading > div {
-        -webkit-animation-delay: 0;
-        animation-delay: 0;
-    }
-    div.heading > div:nth-child(2) > p {
-        -webkit-animation-delay: 0.05s;
-        animation-delay: 0.05s;
-    }
-
-    div.heading > div {
-        -webkit-animation-delay: 0;
-        animation-delay: 0;
-    }
-    div.heading > div:nth-child(3) > p {
-        -webkit-animation-delay: 0.075s;
-        animation-delay: 0.075s;
-    }
-
-    .slide-up {
-        -webkit-animation: slide-up 0.9s cubic-bezier(0.65, 0, 0.35, 1) both;
-        animation: slide-up 0.9s cubic-bezier(0.65, 0, 0.35, 1) both;
-    }
-
-    @-webkit-keyframes slide-up {
-        0% {
-            transform: translateY(100px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes slide-up {
-        0% {
-            transform: translateY(100px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-
-
-
-    .slide-up-1 {
-        -webkit-animation: slide-up-1 3s cubic-bezier(0.65, 0, 0.35, 1) both;
-        animation: slide-up-1 3s cubic-bezier(0.65, 0, 0.35, 1) both;
-    }
-
-    @-webkit-keyframes slide-up-1 {
-        0% {
-            transform: translateY(100px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes slide-up-1 {
-        0% {
-            transform: translateY(100px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-
-
-    .slide-up-2 {
-        -webkit-animation: slide-up-2 6s cubic-bezier(0.65, 0, 0.35, 1) both;
-        animation: slide-up-2 6s cubic-bezier(0.65, 0, 0.35, 1) both;
-    }
-
-    @-webkit-keyframes slide-up-2 {
-        0% {
-            transform: translateY(100px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes slide-up-2 {
-        0% {
-            transform: translateY(100px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    *,
-    *:before,
-    *:after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-    html,
-    body {
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f67280;
-        font-size: 62.5%;
-    }
-    @media screen and (max-width: 520px) {
-        html,
-        body {
-            /* don't know how to set default units to rem in mojs :(( */
-        }
-    }
-    .container {
-        width: 50rem;
-        height: 20rem;
-        position: relative;
-    }
-    .svg-container {
-        z-index: 2;
-        position: absolute;
-    }
-    .mo-container {
-        width: 100%;
-        height: 100%;
-    }
-    .line {
-        fill: none;
-        stroke: #ffffff;
-        stroke-width: 8;
-        stroke-linecap: round;
-        stroke-miterlimit: 10;
-    }
-    .lttr {
-        fill: #763c8c;
-    }
-    .sound {
-        position: fixed;
-        color: #763c8c;
-        font-size: 1.6rem;
-        bottom: 1rem;
-        right: 1rem;
-        text-decoration: underline;
-        cursor: default;
-    }
-    .sound--off {
-        text-decoration: line-through;
-    }
-    .none {
-        display: none;
-    }
-    #love {
-        transform: scale(1);
-        transition: ease-in 2s;
-        backdrop-filter: blur(15px);
-    }
-    #love.an {
-        transform: scale(10);
-        transition: ease-in 2s;
-    }
-</style>
 <body>
-
-<div class="heading text" style="display: none">
-    <div>
-        <p class="slide-up"><span style="color: rgba(255,255,255,0.78)">Хайртаа</span>,</p>
-    </div>
-    <div>
-        <p class="slide-up-1">Хайрдаа хэлчих ээ</p>
-    </div>
-    <div>
-        <p class="slide-up-2">Ккк :)</p>
-    </div>
+<div class="content">
+	<div class="section-1">
+		<form>
+			<div class="wrapper">
+				<input type="checkbox" id="ck1" onClick="check()"/>
+				<label for="ck1">Би</label>
+				<input type="checkbox" id="ck2" onClick="check()"/>
+				<label for="ck2">Чамд</label>
+				<input type="checkbox" id="ck3" onClick="check()"/>
+				<label for="ck3">Хайртай</label>
+				<span class="cancel">(Үгэн дээр дар)</span>
+			</div>
+		</form>
+		<h1 class="text-1" style="display: none; font-size: 88px; color: cyan">Харин</h1>
+		<h1 class="text-2" style="display: none; font-size: 88px; color: cyan">Чи</h1>
+		<h1 class="text-3" style="display: none; font-size: 88px; color: cyan">Надад</h1>
+		<h1 class="text-4" style="display: none; font-size: 88px; color: cyan">Хайртай</h1>
+		<h1 class="text-5" style="display: none; font-size: 88px; color: cyan">Юу</h1>
+		<h2 class="text-6" style="display: none; font-size: 88px; color: cyan">?</h2>
+		<h2 class="text-7" style="display: none; font-size: 88px; color: red; z-index: 1000">😘💕 Үнсеь 💕😘</h2>
+	</div>
+	<div class="section-2 blured">
+		<canvas id="canvas123" style="width: 100%; height: 100vh"></canvas>
+	</div>
 </div>
-<div class="heading text-1" style="display: none">
-    <div>
-        <p class="slide-up">Чамдаа</p>
-    </div>
-    <div>
-        <p class="slide-up-1"><span style="color: rgba(255,255,255,0.78)">---> Хайртай <---</span></p>
-    </div>
-    <div>
-        <p class="slide-up-2">Жүү. Үнсий</p>
-    </div>
-</div>
-<img style="display: none" id="love" src="./ht.webp" alt="LOVE SHVV!!!">
-<div class="heading text-3" style="display: none">
-    <div>
-        <p class="slide-up-1"><span style="color: #ffffff">Намуунболорт</span></p>
-    </div>
-</div>
-<div class="container">
-    <svg class="svg-container" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200">
-        <line class="line line--left" x1="10" y1="17" x2="10" y2="183"> </line>
-        <line class="line line--rght" x1="490" y1="17" x2="490" y2="183"> </line>
-        <g>
-            <path class="lttr lttr--I" d="M42.2,73.9h11.4v52.1H42.2V73.9z"></path>
-            <path class="lttr lttr--L" d="M85.1,73.9h11.4v42.1h22.8v10H85.1V73.9z"></path>
-            <path class="lttr lttr--O" d="M123.9,100c0-15.2,11.7-26.9,27.2-26.9s27.2,11.7,27.2,26.9s-11.7,26.9-27.2,26.9S123.9,115.2,123.9,100zM166.9,100c0-9.2-6.8-16.5-15.8-16.5c-9,0-15.8,7.3-15.8,16.5s6.8,16.5,15.8,16.5C160.1,116.5,166.9,109.2,166.9,100z"> </path>
-            <path class="lttr lttr--V" d="M180.7,73.9H193l8.4,22.9c1.7,4.7,3.5,9.5,5,14.2h0.1c1.7-4.8,3.4-9.4,5.2-14.3l8.6-22.8h11.7l-19.9,52.1h-11.5L180.7,73.9z"></path>
-            <path class="lttr lttr--E" d="M239.1,73.9h32.2v10h-20.7v10.2h17.9v9.5h-17.9v12.4H272v10h-33V73.9z"></path>
-            <path class="lttr lttr--Y" d="M315.8,102.5l-20.1-28.6H309l6.3,9.4c2,3,4.2,6.4,6.3,9.6h0.1c2-3.2,4.1-6.4,6.3-9.6l6.3-9.4h12.9l-19.9,28.5v23.6h-11.4V102.5z"></path>
-            <path class="lttr lttr--O2" d="M348.8,100c0-15.2,11.7-26.9,27.2-26.9c15.5,0,27.2,11.7,27.2,26.9s-11.7,26.9-27.2,26.9C360.5,126.9,348.8,115.2,348.8,100z M391.8,100c0-9.2-6.8-16.5-15.8-16.5c-9,0-15.8,7.3-15.8,16.5s6.8,16.5,15.8,16.5C385,116.5,391.8,109.2,391.8,100z"></path>
-            <path class="lttr lttr--U" d="M412.4,101.1V73.9h11.4v26.7c0,10.9,2.4,15.9,11.5,15.9c8.4,0,11.4-4.6,11.4-15.8V73.9h11v26.9c0,7.8-1.1,13.5-4,17.7c-3.7,5.3-10.4,8.4-18.7,8.4c-8.4,0-15.1-3.1-18.8-8.5C413.4,114.2,412.4,108.5,412.4,101.1z"></path>
-        </g>
-    </svg>
-    <div class="mo-container"> </div>
-</div>
+	<script>
+		function check() {
+			if (
+				document.forms[0].elements[0].checked === true &&
+				document.forms[0].elements[1].checked === true &&
+				document.forms[0].elements[2].checked === true
+			) {
+				if (!$(".wrapper").hasClass("throb")) {
+					$(".wrapper").addClass("throb");
+					$('.section-1').addClass('blured')
+					$('.cancel').fadeOut('slow')
 
 
-<audio class="blup" style="display: none">
-    <source src="https://www.freesound.org/data/previews/265/265115_4373976-lq.mp3" type="audio/ogg">
-</audio >
-<audio class="blop" style="display: none">
-    <source src="https://www.freesound.org/data/previews/265/265115_4373976-lq.mp3" type="audio/ogg">
-</audio>
-<div class="sound">sound</div>
-<script src="//cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+					$('body').addClass('black')
+					setTimeout(() => {
+						$('.section-2').fadeIn('slow')
+					}, 3000)
+					setTimeout(() => {
+						$('.section-1>form').fadeOut("slow")
+						$('.section-1').removeClass('blured')
+					}, 4500)
+
+					setTimeout(() => {
+						$('.text-1').fadeIn("slow")
+					}, 5050)
+					setTimeout(() => {
+						$('.text-1').fadeOut("slow")
+					}, 6500)
+
+					setTimeout(() => {
+						$('.text-2').fadeIn("slow")
+					}, 7500)
+					setTimeout(() => {
+						$('.text-2').fadeOut("slow")
+					}, 9000)
+
+					setTimeout(() => {
+						$('.text-3').fadeIn("slow")
+					}, 10000)
+					setTimeout(() => {
+						$('.text-3').fadeOut("slow")
+					}, 11500)
+
+					setTimeout(() => {
+						$('.text-4').fadeIn("slow")
+					}, 12500)
+					setTimeout(() => {
+						$('.text-4').fadeOut("slow")
+					}, 14000)
+
+					setTimeout(() => {
+						$('.text-6').fadeIn("slow")
+					}, 15000)
+					setTimeout(() => {
+						$('.text-6').addClass("scale-up")
+					}, 16500)
+					setTimeout(() => {
+						$('.text-7').fadeIn("slow")
+					}, 18000)
+				}
+			} else {
+				if ($(".wrapper").hasClass("throb")) {
+					// Do things on Nav Close
+					$(".wrapper").removeClass("throb");
+				}
+			}
+		}
+
+	</script>
 <script>
-    (function () {
-        const source = "nb.mp3";
-        const audio = document.createElement("audio");
-        //
-        audio.autoplay = true;
-        //
-        audio.load()
-        audio.addEventListener("load", function() {
-            audio.play();
-        }, true);
-        audio.src = source;
-        $('.container')
-            .fadeIn(3000)
-            .delay(3000)
-            .fadeOut(2000);
-        setTimeout(() => {
-            $('.text')
-                .fadeIn()
-                .delay(3000)
-                .delay(3000)
-                .fadeOut(2000);
-        }, 5000)
-        setTimeout(() => {
-            $('.text-1')
-                .fadeIn()
-                .delay(3000)
-                .delay(3000)
-                .fadeOut(2000);
-        }, 15000)
-        setTimeout(() => {
-            $('#love')
-                .fadeIn()
-                .delay(3000)
-        }, 25000)
-        setTimeout(() => {
-            $('#love').addClass('an');
-            $('.text-3').fadeIn().delay(3000)
-        }, 30000)
-    })();
-    const qs = document.querySelector.bind(document);
-    const easingHeart = mojs.easing.path('M0,100C2.9,86.7,33.6-7.3,46-7.3s15.2,22.7,26,22.7S89,0,100,0');
+	const canvas = document.getElementById('canvas123')
+	console.log(canvas);
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
 
-    const el = {
-        container: qs('.mo-container'),
+	// Initialize the GL context
+	const gl = canvas.getContext('webgl');
+	if(!gl){
+		console.error("Unable to initialize WebGL.");
+	}
 
-        i: qs('.lttr--I'),
-        l: qs('.lttr--L'),
-        o: qs('.lttr--O'),
-        v: qs('.lttr--V'),
-        e: qs('.lttr--E'),
-        y: qs('.lttr--Y'),
-        o2: qs('.lttr--O2'),
-        u: qs('.lttr--U'),
+	//Time
+	let time = 0.0;
 
-        lineLeft: qs('.line--left'),
-        lineRight: qs('.line--rght'),
+	//************** Shader sources **************
 
-        colTxt: "#763c8c",
-        colHeart: "#fa4843",
+	const vertexSource = `
+attribute vec2 position;
+void main() {
+    gl_Position = vec4(position, 0.0, 1.0);
+}
+`;
 
-        blup: qs('.blup'),
-        blop: qs('.blop'),
-        sound: qs('.sound')
-    };
+	const fragmentSource = `
+precision highp float;
 
-    class Heart extends mojs.CustomShape {
-        getShape() {
-            return '<path d="M50,88.9C25.5,78.2,0.5,54.4,3.8,31.1S41.3,1.8,50,29.9c8.7-28.2,42.8-22.2,46.2,1.2S74.5,78.2,50,88.9z"/>';
-        }
-        getLength () { return 200; }
+uniform float width;
+uniform float height;
+vec2 resolution = vec2(width, height);
+
+uniform float time;
+
+#define POINT_COUNT 8
+
+vec2 points[POINT_COUNT];
+const float speed = -0.5;
+const float len = 0.25;
+float intensity = 1.3;
+float radius = 0.008;
+
+//https://www.shadertoy.com/view/MlKcDD
+//Signed distance to a quadratic bezier
+float sdBezier(vec2 pos, vec2 A, vec2 B, vec2 C){
+    vec2 a = B - A;
+    vec2 b = A - 2.0*B + C;
+    vec2 c = a * 2.0;
+    vec2 d = A - pos;
+
+    float kk = 1.0 / dot(b,b);
+    float kx = kk * dot(a,b);
+    float ky = kk * (2.0*dot(a,a)+dot(d,b)) / 3.0;
+    float kz = kk * dot(d,a);
+
+    float res = 0.0;
+
+    float p = ky - kx*kx;
+    float p3 = p*p*p;
+    float q = kx*(2.0*kx*kx - 3.0*ky) + kz;
+    float h = q*q + 4.0*p3;
+
+    if(h >= 0.0){
+        h = sqrt(h);
+        vec2 x = (vec2(h, -h) - q) / 2.0;
+        vec2 uv = sign(x)*pow(abs(x), vec2(1.0/3.0));
+        float t = uv.x + uv.y - kx;
+        t = clamp( t, 0.0, 1.0 );
+
+        // 1 root
+        vec2 qos = d + (c + b*t)*t;
+        res = length(qos);
+    }else{
+        float z = sqrt(-p);
+        float v = acos( q/(p*z*2.0) ) / 3.0;
+        float m = cos(v);
+        float n = sin(v)*1.732050808;
+        vec3 t = vec3(m + m, -n - m, n - m) * z - kx;
+        t = clamp( t, 0.0, 1.0 );
+
+        // 3 roots
+        vec2 qos = d + (c + b*t.x)*t.x;
+        float dis = dot(qos,qos);
+
+        res = dis;
+
+        qos = d + (c + b*t.y)*t.y;
+        dis = dot(qos,qos);
+        res = min(res,dis);
+
+        qos = d + (c + b*t.z)*t.z;
+        dis = dot(qos,qos);
+        res = min(res,dis);
+
+        res = sqrt( res );
     }
-    mojs.addShape('heart', Heart);
 
-    const crtBoom = (delay = 0, x = 0, rd = 46) => {
-        parent = el.container;
-        const crcl = new mojs.Shape({
-            shape:        'circle',
-            fill:         'none',
-            stroke:        el.colTxt,
-            strokeWidth:  { 5 : 0 },
-            radius:       { [rd] : [rd + 20] },
-            easing:       'quint.out',
-            duration:     500 / 3,
-            parent,
-            delay,
-            x
-        });
+    return res;
+}
 
-        const brst = new mojs.Burst({
-            radius:       { [rd + 15] : 110 },
-            angle:        'rand(60, 180)',
-            count:        3,
-            timeline:     { delay },
-            parent,
-            x,
-            children: {
-                radius:       [5, 3, 7],
-                fill:         el.colTxt,
-                scale:        { 1: 0, easing: 'quad.in' },
-                pathScale:    [ .8, null ],
-                degreeShift:  [ 'rand(13, 60)', null ],
-                duration:     1000 / 3,
-                easing:       'quint.out'
-            }
-        });
 
-        return [crcl, brst];
-    };
+//http://mathworld.wolfram.com/HeartCurve.html
+vec2 getHeartPosition(float t){
+    return vec2(16.0 * sin(t) * sin(t) * sin(t),
+                            -(13.0 * cos(t) - 5.0 * cos(2.0*t)
+                            - 2.0 * cos(3.0*t) - cos(4.0*t)));
+}
 
-    const crtLoveTl = () => {
-        const move        = 1000;
-        const boom        = 200;
-        const easing      = 'sin.inOut';
-        const easingBoom  = 'sin.in';
-        const easingOut   = 'sin.out';
-        const opts        = { duration: move, easing, opacity: 1 };
-        const delta       = 150;
+//https://www.shadertoy.com/view/3s3GDn
+float getGlow(float dist, float radius, float intensity){
+    return pow(radius/dist, intensity);
+}
 
-        return (new mojs.Timeline).add([
-            new mojs.Tween({
-                duration: move,
-                onStart: () => {
-                    [el.i, el.l, el.o, el.v, el.e, el.y, el.o2, el.u].forEach(el => {
-                        el.style.opacity = 1;
-                        el.style = 'transform: translate(0px, 0px) rotate(0deg) skew(0deg, 0deg) scale(1, 1); opacity: 1;'
-                    })
-                },
-                onComplete: () => {
-                    [el.l, el.o, el.v, el.e].forEach(el => el.style.opacity = 0);
-                    el.blop.play();
-                }
-            }),
-
-            new mojs.Tween({
-                duration: move * 2 + boom,
-                onComplete: () => {
-                    [el.y, el.o2].forEach(el => el.style.opacity = 0);
-                    el.blop.play();
-                }
-            }),
-
-            new mojs.Tween({
-                duration: move * 3 + boom * 2 - delta,
-                onComplete: () => {
-                    el.i.style.opacity = 0;
-                    el.blop.play();
-                }
-            }),
-
-            new mojs.Tween({
-                duration: move * 3 + boom * 2,
-                onComplete: () => {
-                    el.u.style.opacity = 0;
-                    el.blup.play();
-                }
-            }),
-
-            new mojs.Tween({
-                duration: 50,
-                delay: 4050,
-                onUpdate: (progress) => {
-                    [el.i, el.l, el.o, el.v, el.e, el.y, el.o2, el.u].forEach(el => {
-                        el.style = `transform: translate(0px, 0px) rotate(0deg) skew(0deg, 0deg) scale(1, 1); opacity: ${1 * progress};`
-                    })
-                },
-                onComplete: () => {
-                    [el.i, el.l, el.o, el.v, el.e, el.y, el.o2, el.u].forEach(el => {
-                        el.style.opacity = 1;
-                        el.style = 'transform: translate(0px, 0px) rotate(0deg) skew(0deg, 0deg) scale(1, 1); opacity: 1;'
-                    })
-                }
-            }),
-
-            new mojs.Html({
-                ...opts,
-                el: el.lineLeft,
-                x: { 0 : 52 },
-            }).then({
-                duration: boom + move,
-                easing,
-                x: { to : 52 + 54 }
-            }).then({
-                duration: boom + move,
-                easing,
-                x: { to : 52 + 54 + 60 }
-            }).then({
-                duration: 150, // 3550
-                easing,
-                x: { to : 52 + 54 + 60 + 10 }
-            }).then({
-                duration: 300
-            }).then({
-                duration: 350,
-                x: { to : 0 },
-                easing: easingOut
-            }),
-
-            new mojs.Html({
-                ...opts,
-                el: el.lineRight,
-                x: { 0 : -52 },
-            }).then({
-                duration: boom + move,
-                easing,
-                x: { to : -52 - 54 }
-            }).then({
-                duration: boom + move,
-                easing,
-                x: { to : -52 - 54 - 60 }
-            }).then({
-                duration: 150,
-                easing,
-                x: { to : -52 - 54 - 60 - 10 }
-            }).then({
-                duration: 300
-            }).then({
-                duration: 350,
-                x: { to : 0 },
-                easing: easingOut,
-            }),
-
-            new mojs.Html({ // [I] LOVE YOU
-                ...opts,
-                el: el.i,
-                x: { 0 : 34 },
-            }).then({
-                duration: boom,
-                easing: easingBoom,
-                x: { to : 34 + 19 }
-            }).then({
-                duration: move,
-                easing,
-                x: { to : 34 + 19 + 40 }
-            }).then({
-                duration: boom,
-                easing: easingBoom,
-                x: { to : 34 + 19 + 40 + 30 }
-            }).then({
-                duration: move,
-                easing,
-                x: { to : 34 + 19 + 40 + 30 + 30 }
-            }),
-
-            new mojs.Html({ // I [L]OVE YOU
-                ...opts,
-                el: el.l,
-                x: { 0 : 15 },
-            }),
-
-            new mojs.Html({ // I L[O]VE YOU
-                ...opts,
-                el: el.o,
-                x: { 0 : 11 },
-            }),
-
-            new mojs.Html({ // I LO[V]E YOU
-                ...opts,
-                el: el.v,
-                x: { 0 : 3 },
-            }),
-
-            new mojs.Html({ // I LOV[E] YOU
-                ...opts,
-                el: el.e,
-                x: { 0 : -3 },
-            }),
-
-            new mojs.Html({ // I LOVE [Y]OU
-                ...opts,
-                el: el.y,
-                x: { 0 : -20 },
-            }).then({
-                duration: boom,
-                easing: easingBoom,
-                x: { to : -20 - 33}
-            }).then({
-                duration: move,
-                easing,
-                x: { to : -20 - 33 - 24 }
-            }),
-
-            new mojs.Html({ // I LOVE Y[O]U
-                ...opts,
-                el: el.o2,
-                x: { 0 : -27 },
-            }).then({
-                duration: boom,
-                easing: easingBoom,
-                x: { to : -27 - 27}
-            }).then({
-                duration: move,
-                easing,
-                x: { to : -27 - 27 - 30 }
-            }),
-
-            new mojs.Html({ // I LOVE YO[U]
-                ...opts,
-                el: el.u,
-                x: { 0 : -32 },
-            }).then({
-                duration: boom,
-                easing: easingBoom,
-                x: { to : -32 - 21}
-            }).then({
-                duration: move,
-                easing,
-                x: { to : -32 - 21 - 36 }
-            }).then({
-                duration: boom,
-                easing: easingBoom,
-                x: { to : -32 - 21 - 36 - 31 }
-            }).then({
-                duration: move,
-                easing,
-                x: { to : -32 - 21 - 36 - 31 - 27 }
-            }),
-
-            new mojs.Shape({
-                parent: el.container,
-                shape: 'heart',
-                delay: move,
-                fill: el.colHeart,
-                x: -64,
-                scale: { 0 : 0.95, easing: easingHeart },
-                duration: 500
-            }).then({
-                x: { to : -62, easing },
-                scale: { to : 0.65, easing },
-                duration: boom + move - 500,
-            }).then({
-                duration: boom - 50,
-                x: { to: -62 + 48 },
-                scale: { to : 0.90 },
-                easing: easingBoom
-            }).then({
-                duration:  125,
-                scale: { to : 0.8 },
-                easing: easingOut
-            }).then({
-                duration:  125,
-                scale: { to : 0.85 },
-                easing: easingOut
-            }).then({
-                duration: move - 200,
-                scale: { to : 0.45 },
-                easing
-            }).then({
-                delay: -75,
-                duration: 150,
-                x: { to: 0 },
-                scale: { to : 0.90 },
-                easing: easingBoom
-            }).then({
-                duration:  125,
-                scale: { to : 0.8 },
-                easing: easingOut
-            }).then({
-                duration:  125, // 3725
-                scale: { to : 0.85 },
-                easing: easingOut
-            }).then({
-                duration: 125, // 3850
-            }).then({
-                duration: 350,
-                scale: { to : 0 },
-                easing: easingOut
-            }),
-
-            ...crtBoom(move, -64, 46),
-            ...crtBoom(move * 2 + boom, 18, 34),
-            ...crtBoom(move * 3 + boom * 2 - delta, -64, 34),
-            ...crtBoom(move * 3 + boom * 2, 45, 34)
-        ]);
-    };
-
-    const loveTl = crtLoveTl().play();
-    setInterval(() => { loveTl.replay() }, 4300);
-
-    const volume = 0.2;
-    el.blup.volume = volume;
-    el.blop.volume = volume;
-
-    const toggleSound = () => {
-        let on = true;
-        return () => {
-            if (on) {
-                el.blup.volume = 0.0;
-                el.blop.volume = 0.0;
-                el.sound.classList.add('sound--off')
-            }
-            else {
-                el.blup.volume = volume;
-                el.blop.volume = volume;
-                el.sound.classList.remove('sound--off')
-            }
-            on = !on;
-        }
+float getSegment(float t, vec2 pos, float offset, float scale){
+    for(int i = 0; i < POINT_COUNT; i++){
+        points[i] = getHeartPosition(offset + float(i)*len + fract(speed * t) * 6.28);
     }
-    el.sound.addEventListener('click', toggleSound());
+
+    vec2 c = (points[0] + points[1]) / 2.0;
+    vec2 c_prev;
+    float dist = 10000.0;
+
+    for(int i = 0; i < POINT_COUNT-1; i++){
+        //https://tinyurl.com/y2htbwkm
+        c_prev = c;
+        c = (points[i] + points[i+1]) / 2.0;
+        dist = min(dist, sdBezier(pos, scale * c_prev, scale * points[i], scale * c));
+    }
+    return max(0.0, dist);
+}
+
+void main(){
+    vec2 uv = gl_FragCoord.xy/resolution.xy;
+    float widthHeightRatio = resolution.x/resolution.y;
+    vec2 centre = vec2(0.5, 0.5);
+    vec2 pos = centre - uv;
+    pos.y /= widthHeightRatio;
+    //Shift upwards to centre heart
+    pos.y += 0.02;
+    float scale = 0.000015 * height;
+
+    float t = time;
+
+    //Get first segment
+  float dist = getSegment(t, pos, 0.0, scale);
+  float glow = getGlow(dist, radius, intensity);
+
+  vec3 col = vec3(0.0);
+
+    //White core
+  col += 10.0*vec3(smoothstep(0.003, 0.001, dist));
+  //Pink glow
+  col += glow * vec3(1.0,0.05,0.3);
+
+  //Get second segment
+  dist = getSegment(t, pos, 3.4, scale);
+  glow = getGlow(dist, radius, intensity);
+
+  //White core
+  col += 10.0*vec3(smoothstep(0.003, 0.001, dist));
+  //Blue glow
+  col += glow * vec3(0.1,0.4,1.0);
+
+    //Tone mapping
+    col = 1.0 - exp(-col);
+
+    //Gamma
+    col = pow(col, vec3(0.4545));
+
+    //Output to screen
+     gl_FragColor = vec4(col,1.0);
+}
+`;
+
+	//************** Utility functions **************
+
+	window.addEventListener('resize', onWindowResize, false);
+
+	function onWindowResize(){
+		canvas.width  = window.innerWidth;
+		canvas.height = window.innerHeight;
+		gl.viewport(0, 0, canvas.width, canvas.height);
+		gl.uniform1f(widthHandle, window.innerWidth);
+		gl.uniform1f(heightHandle, window.innerHeight);
+	}
+
+
+	//Compile shader and combine with source
+	function compileShader(shaderSource, shaderType){
+		const shader = gl.createShader(shaderType);
+		gl.shaderSource(shader, shaderSource);
+		gl.compileShader(shader);
+		if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
+			throw "Shader compile failed with: " + gl.getShaderInfoLog(shader);
+		}
+		return shader;
+	}
+
+	//From https://codepen.io/jlfwong/pen/GqmroZ
+	//Utility to complain loudly if we fail to find the attribute/uniform
+	function getAttribLocation(program, name) {
+		const attributeLocation = gl.getAttribLocation(program, name);
+		if (attributeLocation === -1) {
+			throw 'Cannot find attribute ' + name + '.';
+		}
+		return attributeLocation;
+	}
+
+	function getUniformLocation(program, name) {
+		const attributeLocation = gl.getUniformLocation(program, name);
+		if (attributeLocation === -1) {
+			throw 'Cannot find uniform ' + name + '.';
+		}
+		return attributeLocation;
+	}
+
+	//************** Create shaders **************
+
+	//Create vertex and fragment shaders
+	const vertexShader = compileShader(vertexSource, gl.VERTEX_SHADER);
+	const fragmentShader = compileShader(fragmentSource, gl.FRAGMENT_SHADER);
+
+	//Create shader programs
+	const program = gl.createProgram();
+	gl.attachShader(program, vertexShader);
+	gl.attachShader(program, fragmentShader);
+	gl.linkProgram(program);
+
+	gl.useProgram(program);
+
+	//Set up rectangle covering entire canvas
+	const vertexData = new Float32Array([
+		-1.0,  1.0,     // top left
+		-1.0, -1.0,     // bottom left
+		1.0,  1.0,     // top right
+		1.0, -1.0,     // bottom right
+	]);
+
+	//Create vertex buffer
+	const vertexDataBuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, vertexDataBuffer);
+	gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);
+
+	// Layout of our data in the vertex buffer
+	const positionHandle = getAttribLocation(program, 'position');
+
+	gl.enableVertexAttribArray(positionHandle);
+	gl.vertexAttribPointer(positionHandle,
+		2,                 // position is a vec2 (2 values per component)
+		gl.FLOAT, // each component is a float
+		false,         // don't normalize values
+		2 * 4,         // two 4 byte float components per vertex (32 bit float is 4 bytes)
+		0                 // how many bytes inside the buffer to start from
+	);
+
+	//Set uniform handle
+	const timeHandle = getUniformLocation(program, 'time');
+	const widthHandle = getUniformLocation(program, 'width');
+	const heightHandle = getUniformLocation(program, 'height');
+
+	gl.uniform1f(widthHandle, window.innerWidth);
+	gl.uniform1f(heightHandle, window.innerHeight);
+
+	let lastFrame = Date.now();
+	let thisFrame;
+
+	function draw(){
+
+		//Update time
+		thisFrame = Date.now();
+		time += (thisFrame - lastFrame)/1000;
+		lastFrame = thisFrame;
+
+		//Send uniforms to program
+		gl.uniform1f(timeHandle, time);
+		//Draw a triangle strip connecting vertices 0-4
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+		requestAnimationFrame(draw);
+	}
+
+	draw();
 </script>
 </body>
 </html>
